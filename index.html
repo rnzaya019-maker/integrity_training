@@ -1,0 +1,2341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Integrity Insurance — Interview Preparation | Chris Choibat</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1B3A5C;
+    --navy-deep: #0f2238;
+    --navy-mid: #243f62;
+    --teal: #2D8B7A;
+    --teal-light: #3aab97;
+    --teal-pale: #e8f5f2;
+    --gold: #B8821E;
+    --gold-pale: #fdf6e8;
+    --slate: #475569;
+    --slate-light: #64748b;
+    --silver: #94a3b8;
+    --cloud: #f1f5f9;
+    --fog: #f8fafc;
+    --white: #ffffff;
+    --border: #e2e8f0;
+    --border-dark: #cbd5e1;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --red: #b91c1c;
+    --red-pale: #fef2f2;
+    --green: #166534;
+    --green-pale: #f0fdf4;
+    --radius: 10px;
+    --radius-lg: 16px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+    --shadow: 0 4px 16px rgba(27,58,92,0.08), 0 1px 4px rgba(0,0,0,0.04);
+    --shadow-lg: 0 12px 40px rgba(27,58,92,0.12), 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--fog);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* ─── LAYOUT ─── */
+  .app-shell { display: flex; min-height: 100vh; }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: var(--navy-deep);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    z-index: 100;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .sidebar-brand {
+    padding: 28px 24px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.01em;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+
+  .brand-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+  }
+
+  .sidebar-label {
+    padding: 20px 24px 8px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.3);
+    font-weight: 600;
+  }
+
+  .sidebar-nav { flex: 1; padding: 0 12px; }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    margin-bottom: 2px;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    color: rgba(255,255,255,0.55);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    font-weight: 400;
+  }
+
+  .nav-item:hover {
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.85);
+  }
+
+  .nav-item.active {
+    background: rgba(45,139,122,0.2);
+    color: var(--teal-light);
+    font-weight: 600;
+    border-left: 2px solid var(--teal-light);
+    padding-left: 12px;
+  }
+
+  .nav-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  .nav-item.active .nav-icon { opacity: 1; }
+
+  .sidebar-footer {
+    padding: 18px 24px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    line-height: 1.6;
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  .main-content {
+    margin-left: 260px;
+    flex: 1;
+    min-height: 100vh;
+  }
+
+  .content-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .content-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+  }
+
+  .header-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--teal);
+    background: var(--teal-pale);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .content-body {
+    padding: 36px 40px 60px;
+    max-width: 1000px;
+  }
+
+  /* ─── PANELS ─── */
+  .panel { display: none; animation: fadeIn 0.25s ease; }
+  .panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTION HEADINGS ─── */
+  .section-intro {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  .section-desc {
+    color: var(--text-muted);
+    font-size: 14.5px;
+    line-height: 1.7;
+    max-width: 640px;
+  }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card-title svg { flex-shrink: 0; }
+
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .card-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+
+  /* ─── STAT TILES ─── */
+  .stat-tile {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .stat-tile.teal .stat-value { color: var(--teal); }
+  .stat-tile.gold .stat-value { color: var(--gold); }
+
+  /* ─── PLAN CARDS ─── */
+  .plan-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .plan-header {
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background 0.15s;
+    border-bottom: 1px solid transparent;
+  }
+
+  .plan-header:hover { background: var(--fog); }
+  .plan-header.open { border-bottom-color: var(--border); }
+
+  .plan-header-left { display: flex; align-items: center; gap: 14px; }
+
+  .plan-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .plan-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .plan-code {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .plan-chevron {
+    width: 18px; height: 18px;
+    color: var(--silver);
+    transition: transform 0.22s;
+  }
+
+  .plan-header.open .plan-chevron { transform: rotate(180deg); }
+
+  .plan-body { padding: 22px 24px; display: none; }
+  .plan-body.open { display: block; }
+
+  .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  .plan-col-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .check-list { list-style: none; }
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 13.5px;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .check-list li svg { flex-shrink: 0; margin-top: 2px; }
+
+  /* ─── COMPLIANCE TABLE ─── */
+  .compliance-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+
+  .compliance-table th {
+    background: var(--navy);
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 12px 16px;
+    text-align: left;
+  }
+
+  .compliance-table th:first-child { border-radius: 8px 0 0 0; }
+  .compliance-table th:last-child { border-radius: 0 8px 0 0; }
+
+  .compliance-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--text);
+  }
+
+  .compliance-table tr:last-child td { border-bottom: none; }
+  .compliance-table tr:nth-child(even) td { background: var(--fog); }
+  .compliance-table tr:hover td { background: var(--teal-pale); }
+
+  /* ─── BADGES ─── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .badge-teal { background: var(--teal-pale); color: var(--teal); }
+  .badge-navy { background: rgba(27,58,92,0.08); color: var(--navy); }
+  .badge-gold { background: var(--gold-pale); color: var(--gold); }
+  .badge-red { background: var(--red-pale); color: var(--red); }
+  .badge-green { background: var(--green-pale); color: var(--green); }
+  .badge-slate { background: var(--cloud); color: var(--slate); }
+
+  /* ─── CALLOUT BOX ─── */
+  .callout {
+    border-left: 3px solid var(--teal);
+    background: var(--teal-pale);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    font-size: 13.5px;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.65;
+  }
+
+  .callout strong { color: var(--navy); }
+
+  .callout-gold {
+    border-left-color: var(--gold);
+    background: var(--gold-pale);
+  }
+
+  .callout-red {
+    border-left-color: var(--red);
+    background: var(--red-pale);
+  }
+
+  .callout-navy {
+    border-left-color: var(--navy);
+    background: rgba(27,58,92,0.05);
+  }
+
+  /* ─── WORKFLOW TIMELINE ─── */
+  .timeline { position: relative; padding-left: 28px; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--teal), var(--border));
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -24px;
+    top: 4px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--teal);
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 2px var(--teal);
+  }
+
+  .timeline-step {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .timeline-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .timeline-desc {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* ─── QUIZ ─── */
+  .quiz-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .quiz-question {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 16px;
+    line-height: 1.45;
+  }
+
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+
+  .quiz-option {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 16px;
+    cursor: pointer;
+    font-size: 13.5px;
+    color: var(--text);
+    background: var(--fog);
+    transition: all 0.15s;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.45;
+  }
+
+  .quiz-option:hover { border-color: var(--teal); background: var(--teal-pale); }
+  .quiz-option.correct { border-color: #15803d; background: var(--green-pale); color: var(--green); font-weight: 600; }
+  .quiz-option.wrong { border-color: var(--red); background: var(--red-pale); color: var(--red); }
+  .quiz-option.reveal { border-color: #15803d; background: var(--green-pale); color: var(--green); font-weight: 600; }
+  .quiz-option.disabled { pointer-events: none; opacity: 0.6; }
+
+  .quiz-explanation {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+    background: var(--cloud);
+    border-radius: 7px;
+    padding: 10px 14px;
+    line-height: 1.6;
+    display: none;
+  }
+
+  .quiz-explanation.show { display: block; }
+
+  .quiz-progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .quiz-score {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 999px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--teal-light));
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+
+  /* ─── TRACKER ─── */
+  .tracker-toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .tracker-input {
+    flex: 1;
+    min-width: 200px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 13.5px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .tracker-input:focus { border-color: var(--teal); }
+
+  .tracker-select {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    cursor: pointer;
+    outline: none;
+  }
+
+  .btn {
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .btn-primary {
+    background: var(--teal);
+    color: var(--white);
+    box-shadow: 0 2px 8px rgba(45,139,122,0.3);
+  }
+
+  .btn-primary:hover { background: var(--teal-light); }
+
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--slate);
+  }
+
+  .btn-outline:hover { border-color: var(--navy); color: var(--navy); }
+
+  .btn-sm { padding: 6px 13px; font-size: 12.5px; }
+
+  .client-row {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.15s;
+  }
+
+  .client-row:hover { box-shadow: var(--shadow); }
+
+  .client-row-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 18px;
+    cursor: pointer;
+  }
+
+  .client-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .client-name { font-weight: 600; color: var(--navy); font-size: 14px; }
+  .client-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  .client-urgency {
+    margin-left: auto;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .urgency-days {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .urgency-label { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+
+  .client-detail {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 16px 18px;
+    background: var(--fog);
+  }
+
+  .client-detail.open { display: block; }
+
+  .client-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .detail-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .detail-value { font-size: 13.5px; color: var(--text); font-weight: 500; }
+
+  /* ─── ENROLLMENT MODAL ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,34,56,0.55);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px);
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 520px;
+    width: calc(100% - 40px);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+    animation: slideUp 0.25s ease;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 22px;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .form-row.full { grid-template-columns: 1fr; }
+
+  .form-label {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 6px;
+  }
+
+  .form-input, .form-select {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 13.5px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .form-input:focus, .form-select:focus { border-color: var(--teal); }
+
+  .modal-footer { display: flex; gap: 10px; margin-top: 20px; }
+
+  /* ─── ENROLLMENT PERIOD BANNER ─── */
+  .period-banner {
+    background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-mid) 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .period-banner-text { color: var(--white); }
+  .period-banner-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .period-banner-sub { font-size: 13px; color: rgba(255,255,255,0.6); }
+
+  .period-countdown {
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 14px 22px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .countdown-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--teal-light);
+    line-height: 1;
+  }
+
+  .countdown-label { font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+  /* ─── DIVIDER ─── */
+  .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  /* ─── KEY TERM ─── */
+  .term-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .term-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .term-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--teal);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 5px;
+  }
+
+  .term-def {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+
+  /* ─── HIGHLIGHT BOX ─── */
+  .highlight-box {
+    background: linear-gradient(135deg, var(--navy-deep), var(--navy-mid));
+    border-radius: var(--radius-lg);
+    padding: 26px 30px;
+    color: var(--white);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .highlight-box::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(45,139,122,0.12);
+  }
+
+  .highlight-box-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--teal-light);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .highlight-box-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .highlight-box-text {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 860px) {
+    .sidebar { width: 220px; }
+    .main-content { margin-left: 220px; }
+    .content-body { padding: 24px 20px 48px; }
+    .card-grid, .card-grid-3, .plan-grid, .client-detail-grid, .term-grid { grid-template-columns: 1fr; }
+    .content-header { padding: 16px 20px; }
+  }
+
+  /* ─── PRINT ─── */
+  .no-print { }
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-name">Integrity Insurance</div>
+      <div class="brand-sub">Interview Prep · Chris Choibat</div>
+    </div>
+
+    <div class="sidebar-label">Study Modules</div>
+    <div class="sidebar-nav">
+
+      <button class="nav-item active" onclick="showPanel('overview')">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+        </svg>
+        Company Overview
+      </button>
+
+      <button class="nav-item" onclick="showPanel('products')">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+        </svg>
+        Products &amp; Plans
+      </button>
+
+      <button class="nav-item" onclick="showPanel('workflow')">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+        </svg>
+        Daily Operations
+      </button>
+
+      <button class="nav-item" onclick="showPanel('compliance')">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+        </svg>
+        Compliance &amp; Regulations
+      </button>
+
+      <button class="nav-item" onclick="showPanel('knowledge')">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+        </svg>
+        Key Terminology
+      </button>
+
+      <button class="nav-item" onclick="showPanel('quiz')">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+        </svg>
+        Knowledge Check
+      </button>
+
+      <div class="sidebar-label" style="margin-top:8px;">Tools</div>
+
+      <button class="nav-item" onclick="showPanel('tracker')">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+        </svg>
+        Renewal Tracker
+      </button>
+
+      <button class="nav-item" onclick="showPanel('explainer')">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h4a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+        </svg>
+        Plan Explainer
+      </button>
+
+    </div>
+
+    <div class="sidebar-footer">
+      Integrity Insurance LLC<br>
+      9200 W. Cross Dr., Suite 122<br>
+      Littleton, CO 80123<br>
+      (720) 990-1680
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <div class="content-header">
+      <h1 id="page-title">Company Overview</h1>
+      <div class="header-badge">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+        </svg>
+        Monday Interview
+      </div>
+    </div>
+
+    <div class="content-body">
+
+      <!-- ══════════════════════════════════════════
+           PANEL 1 — COMPANY OVERVIEW
+      ══════════════════════════════════════════ -->
+      <div id="panel-overview" class="panel active">
+
+        <div class="section-intro">
+          <div class="section-label">Module 1</div>
+          <div class="section-title">Company Overview</div>
+          <div class="section-desc">A deep profile of Integrity Insurance LLC — who they are, how they operate, and what drives Amanda Matthews' vision for the agency.</div>
+        </div>
+
+        <div class="highlight-box" style="margin-bottom:24px;">
+          <div class="highlight-box-label">About Integrity Insurance</div>
+          <div class="highlight-box-title">Independent Medicare Brokerage · Founded 2019</div>
+          <div class="highlight-box-text">Founded by Amanda Matthews after 20+ years in Medicare, Integrity Insurance operates as a consultative, compassion-first independent broker representing 9 insurance organizations and 133 products across Colorado and 30+ states. The agency is not captive to any single carrier — their job is to find the right plan for each individual client, not to push one product.</div>
+        </div>
+
+        <div class="card-grid-3">
+          <div class="stat-tile">
+            <div class="stat-value">2019</div>
+            <div class="stat-label">Year founded</div>
+          </div>
+          <div class="stat-tile teal">
+            <div class="stat-value">133</div>
+            <div class="stat-label">Products offered in CO</div>
+          </div>
+          <div class="stat-tile gold">
+            <div class="stat-value">9</div>
+            <div class="stat-label">Carrier organizations</div>
+          </div>
+        </div>
+
+        <div class="card-grid">
+
+          <div class="card">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
+              Amanda Matthews — Founder
+            </div>
+            <ul class="check-list">
+              <li>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                20+ years Medicare experience (started 2005, Kansas City)
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                Former regional manager at a major Medicare carrier — recognized nationally for sales strategy &amp; innovation
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                Goldman Sachs 10,000 Small Businesses graduate
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                Disney Perfect Service Experience graduate
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                Grew agency to 20 agents in first year
+              </li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/></svg>
+              Agency Culture &amp; Values
+            </div>
+            <ul class="check-list">
+              <li>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                Tagline: <em>"Creating moments of delight in Medicare"</em>
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                Core values: Ethics, compassion, knowledge, team collaboration
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                Consultative approach — listen first, advise second
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                Independent = unbiased advice (not commission-driven by one carrier)
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                All consultations free and no-obligation to clients
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+            Market Position &amp; Business Model
+          </div>
+          <div class="callout callout-navy">
+            <strong>Independent Broker vs. Captive Agent:</strong> Integrity is an independent FMO (Field Marketing Organization) working through Impact Legacy Group. This means agents are NOT locked to one carrier. They compare plans across all 9 carriers to find what is genuinely best for each client — a critical distinction that Amanda emphasizes in her messaging.
+          </div>
+          <div class="card-grid" style="margin:0;">
+            <div>
+              <div class="plan-col-label" style="margin-bottom:12px;">Revenue Model</div>
+              <ul class="check-list">
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><circle cx="10" cy="10" r="8"/></svg> Commissions paid directly by insurance carriers</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><circle cx="10" cy="10" r="8"/></svg> Clients pay $0 for agent/broker services</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><circle cx="10" cy="10" r="8"/></svg> Initial enrollment: ~$694/member (2026 FMV)</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><circle cx="10" cy="10" r="8"/></svg> Renewal commissions: ~$347/member/year</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><circle cx="10" cy="10" r="8"/></svg> Revenue compounds as client base grows</li>
+              </ul>
+            </div>
+            <div>
+              <div class="plan-col-label" style="margin-bottom:12px;">Geographic Reach</div>
+              <ul class="check-list">
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><circle cx="10" cy="10" r="8"/></svg> Primary market: Colorado (Littleton/Denver metro)</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><circle cx="10" cy="10" r="8"/></svg> Licensed in 30+ states</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><circle cx="10" cy="10" r="8"/></svg> Includes AZ, TX, FL, IL, KS, MO and more</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><circle cx="10" cy="10" r="8"/></svg> Office hrs: 8:30 AM–4:30 PM M–F</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><circle cx="10" cy="10" r="8"/></svg> Tech platform: SunFire Matrix for quoting &amp; enrollment</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-gold">
+          <strong>Chris's Strategic Angle:</strong> His wife works in Medicaid home care (Complex Home Care Solutions). Integrity serves dual-eligible clients — people who have both Medicare AND Medicaid. This creates a legitimate referral relationship bridge he can mention: "I actually have direct exposure to the Medicaid side of this population through my household, which gives me context that's unusual for someone new to Medicare insurance."
+        </div>
+
+      </div><!-- /overview -->
+
+
+      <!-- ══════════════════════════════════════════
+           PANEL 2 — PRODUCTS & PLANS
+      ══════════════════════════════════════════ -->
+      <div id="panel-products" class="panel">
+
+        <div class="section-intro">
+          <div class="section-label">Module 2</div>
+          <div class="section-title">Products &amp; Plans</div>
+          <div class="section-desc">Every product line Integrity sells — how each works, who it is for, and what differentiates them. Know these cold before Monday.</div>
+        </div>
+
+        <!-- Medicare Advantage -->
+        <div class="plan-card">
+          <div class="plan-header" onclick="togglePlan(this)">
+            <div class="plan-header-left">
+              <div class="plan-dot" style="background:var(--teal);"></div>
+              <div>
+                <div class="plan-name">Medicare Advantage</div>
+                <div class="plan-code">Part C · HMO / PPO / SNP</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="badge badge-teal">Primary Product</span>
+              <svg class="plan-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </div>
+          </div>
+          <div class="plan-body">
+            <div class="callout" style="margin-bottom:18px;">
+              A private insurance plan that <strong>replaces Original Medicare</strong>. Must cover everything Original Medicare covers, but often includes dental, vision, hearing, gym, transportation, and drug coverage bundled in — often at $0 monthly premium.
+            </div>
+            <div class="plan-grid">
+              <div>
+                <div class="plan-col-label">Key Features</div>
+                <ul class="check-list">
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Often $0 monthly premium</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Extra benefits (dental, vision, hearing, gym)</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Usually includes Part D drug coverage</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Annual Maximum Out-of-Pocket (MOOP) cap</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Plans change annually — review recommended</li>
+                </ul>
+              </div>
+              <div>
+                <div class="plan-col-label">Things to Consider with Clients</div>
+                <ul class="check-list">
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg> Are doctors/hospitals in-network?</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg> Are medications on the formulary?</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg> Is there a deductible (and on which tiers)?</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg> Does the client travel across state lines?</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg> Qualifies for Low Income Subsidy or Medicaid?</li>
+                </ul>
+              </div>
+            </div>
+            <div style="margin-top:14px;">
+              <span class="badge badge-slate" style="margin-right:6px;">HMO: Strict network, lowest cost</span>
+              <span class="badge badge-slate" style="margin-right:6px;">PPO: Flexible network, moderate cost</span>
+              <span class="badge badge-teal">SNP: Special Needs Plan for dual-eligibles &amp; chronic conditions</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Medicare Supplement -->
+        <div class="plan-card">
+          <div class="plan-header" onclick="togglePlan(this)">
+            <div class="plan-header-left">
+              <div class="plan-dot" style="background:var(--navy);"></div>
+              <div>
+                <div class="plan-name">Medicare Supplement (Medigap)</div>
+                <div class="plan-code">Plans A–N · Issued by private carriers</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="badge badge-navy">Core Product</span>
+              <svg class="plan-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </div>
+          </div>
+          <div class="plan-body">
+            <div class="callout callout-navy" style="margin-bottom:18px;">
+              Works <strong>alongside</strong> Original Medicare (does not replace it). Pays for gaps Medicare doesn't cover — copays, deductibles, coinsurance. Client shows two cards at doctor's office. Accepted <strong>anywhere Medicare is accepted</strong> in the US — no network restrictions.
+            </div>
+            <div class="plan-grid">
+              <div>
+                <div class="plan-col-label">Most Popular Plans at Integrity</div>
+                <ul class="check-list">
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--navy)"><circle cx="10" cy="10" r="8"/></svg> <strong>Plan G</strong> — Most comprehensive for new enrollees (Part B deductible not covered)</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--navy)"><circle cx="10" cy="10" r="8"/></svg> <strong>Plan N</strong> — Lower premium with small copays for office/ER visits</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--navy)"><circle cx="10" cy="10" r="8"/></svg> <strong>Plan F</strong> — No longer for new enrollees after Jan 1, 2020 (existing holders keep it)</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--navy)"><circle cx="10" cy="10" r="8"/></svg> Premiums typically $100–$300/month</li>
+                </ul>
+              </div>
+              <div>
+                <div class="plan-col-label">Key Differences vs. Medicare Advantage</div>
+                <ul class="check-list">
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> No network restrictions — nationwide coverage</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> No referrals needed for specialists</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Ideal for frequent travelers</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg> Does NOT include dental, vision, hearing</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg> Requires separate Part D plan for drugs</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Part D -->
+        <div class="plan-card">
+          <div class="plan-header" onclick="togglePlan(this)">
+            <div class="plan-header-left">
+              <div class="plan-dot" style="background:var(--gold);"></div>
+              <div>
+                <div class="plan-name">Part D — Prescription Drug Plan</div>
+                <div class="plan-code">Standalone PDP · Add-on for Supplement clients</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="badge badge-gold">Add-On</span>
+              <svg class="plan-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </div>
+          </div>
+          <div class="plan-body">
+            <div class="callout callout-gold" style="margin-bottom:14px;">
+              Required for clients on Original Medicare + Supplement. Covers prescription drugs. Formularies (covered drug lists) and cost structures vary significantly by carrier. Clients who don't enroll when eligible face a <strong>late enrollment penalty</strong>.
+            </div>
+            <ul class="check-list">
+              <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><circle cx="10" cy="10" r="8"/></svg> Can be purchased as standalone plan alongside Original Medicare or Supplement</li>
+              <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><circle cx="10" cy="10" r="8"/></svg> Most Medicare Advantage plans bundle Part D — no separate plan needed</li>
+              <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><circle cx="10" cy="10" r="8"/></svg> Low Income Subsidy (LIS/Extra Help) can reduce or eliminate premiums for qualifying clients</li>
+              <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--gold)"><circle cx="10" cy="10" r="8"/></svg> Plans change annually — review formulary &amp; cost structure each Open Enrollment</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Life, Health, Other -->
+        <div class="plan-card">
+          <div class="plan-header" onclick="togglePlan(this)">
+            <div class="plan-header-left">
+              <div class="plan-dot" style="background:var(--slate);"></div>
+              <div>
+                <div class="plan-name">Life Insurance, Health &amp; Specialty Lines</div>
+                <div class="plan-code">Final Expense · Term Life · Hospital Indemnity · Travel · Under-65 Health</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="badge badge-slate">Secondary Lines</span>
+              <svg class="plan-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </div>
+          </div>
+          <div class="plan-body">
+            <div class="plan-grid">
+              <div>
+                <div class="plan-col-label">Products Offered</div>
+                <ul class="check-list">
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--slate)"><circle cx="10" cy="10" r="8"/></svg> <strong>Final Expense Life</strong> — Smaller whole life policies to cover funeral/burial costs</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--slate)"><circle cx="10" cy="10" r="8"/></svg> <strong>Term Life</strong> — Temporary coverage for income replacement</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--slate)"><circle cx="10" cy="10" r="8"/></svg> <strong>Hospital Indemnity</strong> — Cash benefit paid during hospital stays</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--slate)"><circle cx="10" cy="10" r="8"/></svg> <strong>Travel Insurance</strong> — Coverage for trips and medical emergencies abroad</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--slate)"><circle cx="10" cy="10" r="8"/></svg> <strong>Under-65 Health</strong> — ACA marketplace plans for pre-Medicare clients</li>
+                </ul>
+              </div>
+              <div>
+                <div class="plan-col-label">Special Situations</div>
+                <ul class="check-list">
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Medicare &amp; VA: Veterans may coordinate VA + Medicare for maximum savings</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Medicare &amp; Tricare: Military retirees — Medicare Advantage can complement Tricare for Life</li>
+                  <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Medicare &amp; Medicaid (Dual Eligible): SNPs available with extra benefits</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /products -->
+
+
+      <!-- ══════════════════════════════════════════
+           PANEL 3 — DAILY OPERATIONS
+      ══════════════════════════════════════════ -->
+      <div id="panel-workflow" class="panel">
+
+        <div class="section-intro">
+          <div class="section-label">Module 3</div>
+          <div class="section-title">Daily Operations</div>
+          <div class="section-desc">What Chris's day-to-day will actually look like — the sales cycle, administrative tasks, and seasonal rhythms of the agency.</div>
+        </div>
+
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+              Enrollment Periods — Know These Cold
+            </div>
+            <table class="compliance-table" style="border-radius:8px;overflow:hidden;">
+              <tr><th>Period</th><th>Dates</th><th>Who</th></tr>
+              <tr><td><strong>AEP — Annual Enrollment</strong></td><td>Oct 15 – Dec 7</td><td>All Medicare beneficiaries</td></tr>
+              <tr><td><strong>OEP — Open Enrollment</strong></td><td>Jan 1 – Mar 31</td><td>MA plan holders only</td></tr>
+              <tr><td><strong>IEP — Initial Enrollment</strong></td><td>3 mo before / 3 mo after 65th birthday</td><td>Turning 65</td></tr>
+              <tr><td><strong>SEP — Special Enrollment</strong></td><td>Triggered by life event</td><td>Losing coverage, dual-eligible, etc.</td></tr>
+              <tr><td><strong>GEP — General Enrollment</strong></td><td>Jan 1 – Mar 31</td><td>Missed IEP window</td></tr>
+              <tr><td><strong>Marketing begins</strong></td><td>Oct 1 (for next year plans)</td><td>Agents — CMS regulated</td></tr>
+            </table>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="var(--teal)"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/></svg>
+              Client Lifecycle — Intake to Enrollment
+            </div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-step">Step 1</div>
+                <div class="timeline-title">Inbound Inquiry / Lead</div>
+                <div class="timeline-desc">Phone call, website form, or referral. Admin logs inquiry in CRM, collects basic info (name, DOB, county, current coverage).</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-step">Step 2</div>
+                <div class="timeline-title">SOA Collection</div>
+                <div class="timeline-desc">Scope of Appointment form sent and signed. CMS requires minimum 48 hours before appointment. Filed for 10 years.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-step">Step 3</div>
+                <div class="timeline-title">Agent Consultation</div>
+                <div class="timeline-desc">Agent reviews client situation: doctors, prescriptions, budget, travel patterns. Uses SunFire Matrix to pull plan options.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-step">Step 4</div>
+                <div class="timeline-title">Plan Comparison &amp; Enrollment</div>
+                <div class="timeline-desc">Agent presents options — unbiased across all 9 carriers. Client selects plan. Enrollment submitted via SunFire or carrier portal.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-step">Step 5</div>
+                <div class="timeline-title">Post-Enrollment &amp; Ongoing Service</div>
+                <div class="timeline-desc">CRM updated. Client receives plan documents. Admin tracks renewal dates, birthdays turning 65, and AEP review schedule.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h4a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/></svg>
+            Administrative Responsibilities — Chris's Role
+          </div>
+          <div class="card-grid" style="margin:0;">
+            <div>
+              <div class="plan-col-label" style="margin-bottom:12px;">Daily Administrative Tasks</div>
+              <ul class="check-list">
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Answer and triage inbound calls — route to correct agent</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Maintain CRM records — client info, plan details, SOAs</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Send and track SOA forms before appointments</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Schedule and confirm agent appointments</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Handle client service requests (plan changes, billing qs)</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Follow up on pending enrollments / missing documents</li>
+              </ul>
+            </div>
+            <div>
+              <div class="plan-col-label" style="margin-bottom:12px;">Seasonal &amp; Strategic Tasks</div>
+              <ul class="check-list">
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--navy)"><circle cx="10" cy="10" r="8"/></svg> Pre-AEP outreach — alert existing clients for annual review (Sept–Oct)</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--navy)"><circle cx="10" cy="10" r="8"/></svg> Birthday-turning-65 outreach list — 3–6 months in advance</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--navy)"><circle cx="10" cy="10" r="8"/></svg> Track plan renewal dates for proactive service calls</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--navy)"><circle cx="10" cy="10" r="8"/></svg> Support agent marketing events — logistics, sign-in, SOA cards</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--navy)"><circle cx="10" cy="10" r="8"/></svg> Maintain document retention — SOAs 10 years per CMS rules</li>
+                <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--navy)"><circle cx="10" cy="10" r="8"/></svg> Support Amanda's ongoing AHIP annual certification process</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-gold">
+          <strong>Open Enrollment Season (Oct 15 – Dec 7):</strong> This is the busiest period of the year — comparable to tax season for accountants. Call volume, enrollment paperwork, and administrative complexity spike dramatically. Being calm, accurate, and organized during this period is the most valuable thing a Client Delight Specialist can offer.
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="var(--teal)"><path d="M3 12v3c0 1.657 3.134 3 7 3s7-1.343 7-3v-3c0 1.657-3.134 3-7 3s-7-1.343-7-3z"/><path d="M3 7v3c0 1.657 3.134 3 7 3s7-1.343 7-3V7c0 1.657-3.134 3-7 3S3 8.657 3 7z"/><path d="M17 5c0 1.657-3.134 3-7 3S3 6.657 3 5s3.134-3 7-3 7 1.343 7 3z"/></svg>
+            Technology Stack at Integrity
+          </div>
+          <div class="card-grid" style="margin:0;">
+            <ul class="check-list">
+              <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><circle cx="10" cy="10" r="8"/></svg> <strong>SunFire Matrix</strong> — Medicare quoting, plan comparison, and enrollment platform. The primary tool agents use to view and enroll plans.</li>
+              <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><circle cx="10" cy="10" r="8"/></svg> <strong>CRM (via Impact Legacy Group)</strong> — Pre-built client database. Import/export client files. Automations and workflows included.</li>
+              <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--teal)"><circle cx="10" cy="10" r="8"/></svg> <strong>InsuranceToolkits</strong> — Quoting tools for Life (Final Expense, Term) and Medicare Supplement rate comparison.</li>
+            </ul>
+            <ul class="check-list">
+              <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--navy)"><circle cx="10" cy="10" r="8"/></svg> <strong>Carrier portals</strong> — Each of the 9 carriers has its own portal for enrollment tracking and member services.</li>
+              <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--navy)"><circle cx="10" cy="10" r="8"/></svg> <strong>Impact Legacy Group platform</strong> — FMO tools for compliance, marketing, and lead management.</li>
+              <li><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--navy)"><circle cx="10" cy="10" r="8"/></svg> <strong>Colorado Peak (Health First)</strong> — State Medicaid portal for helping dual-eligible clients verify eligibility.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /workflow -->
+
+
+      <!-- ══════════════════════════════════════════
+           PANEL 4 — COMPLIANCE & REGULATIONS
+      ══════════════════════════════════════════ -->
+      <div id="panel-compliance" class="panel">
+
+        <div class="section-intro">
+          <div class="section-label">Module 4</div>
+          <div class="section-title">Compliance &amp; Regulations</div>
+          <div class="section-desc">The regulatory framework governing Integrity Insurance — federal CMS rules, Colorado state law, and what compliance means for Chris's day-to-day work.</div>
+        </div>
+
+        <div class="callout callout-red">
+          <strong>Why this matters for Chris:</strong> Even as an administrative support role, Chris will handle SOA forms, client records, and marketing materials. Understanding compliance is not optional — a single violation can trigger CMS sanctions, commission reversals, or carrier contract loss. Amanda has a Disney-level service standard; compliance is the non-negotiable floor under it.
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Federal CMS Rules — Critical for Admin Staff
+          </div>
+          <table class="compliance-table" style="border-radius:8px;overflow:hidden;">
+            <tr>
+              <th>Rule</th>
+              <th>Requirement</th>
+              <th>Admin Impact</th>
+            </tr>
+            <tr>
+              <td><strong>SOA — 48-Hour Rule</strong></td>
+              <td>Scope of Appointment must be collected at least 48 hours before a Medicare sales appointment. Exceptions: walk-ins, inbound calls, or within 4 days of enrollment period end.</td>
+              <td>Chris must track SOA dates and flag any scheduled appointments that haven't reached the 48-hour window.</td>
+            </tr>
+            <tr>
+              <td><strong>SOA — Retention</strong></td>
+              <td>SOA forms must be retained for a minimum of 10 years, even if no sale was made.</td>
+              <td>All SOAs must be filed in the CRM immediately after collection. Never discard.</td>
+            </tr>
+            <tr>
+              <td><strong>SOA — Scope Limits</strong></td>
+              <td>Agents may only discuss the plan types listed on the SOA. If the client wants to discuss something not listed, a new SOA must be completed and a new appointment scheduled (48-hr wait).</td>
+              <td>Understand this so Chris can brief clients correctly when scheduling.</td>
+            </tr>
+            <tr>
+              <td><strong>TPMO Disclosure</strong></td>
+              <td>All marketing materials must include the CMS TPMO disclaimer: "We do not offer every plan available in your area. Currently we represent 9 organizations which offer 133 products in your area..."</td>
+              <td>Chris must verify this disclosure is present on any marketing material before distribution.</td>
+            </tr>
+            <tr>
+              <td><strong>Marketing Dates</strong></td>
+              <td>Agents cannot market next year's plans until October 1. Cannot enroll until October 15.</td>
+              <td>No promotional materials for upcoming plan year before Oct 1.</td>
+            </tr>
+            <tr>
+              <td><strong>Call Recording</strong></td>
+              <td>All sales, marketing, and enrollment calls must be recorded in their entirety.</td>
+              <td>Ensure recording systems are active and functional for every client interaction.</td>
+            </tr>
+            <tr>
+              <td><strong>Educational vs. Sales Events</strong></td>
+              <td>Cannot hold a sales/marketing event within 12 hours of an educational event at the same or adjacent location. Cannot collect SOA cards at educational events.</td>
+              <td>Event scheduling must respect this separation.</td>
+            </tr>
+            <tr>
+              <td><strong>CMS Pre-Enrollment Checklist</strong></td>
+              <td>Before enrollment, agents must fully discuss: network providers, pharmacy network, drug formulary, costs, premiums, benefits, and specific health care needs.</td>
+              <td>Intake checklist must capture this information before appointment handoff.</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd"/></svg>
+            Colorado State Regulations (DORA — Division of Insurance)
+          </div>
+          <table class="compliance-table" style="border-radius:8px;overflow:hidden;">
+            <tr><th>Requirement</th><th>Detail</th></tr>
+            <tr>
+              <td><strong>License Required</strong></td>
+              <td>Colorado Life &amp; Health (Accident &amp; Health) license required to sell Medicare Advantage, Supplement, Part D, or Life products. Issued by DORA DOI.</td>
+            </tr>
+            <tr>
+              <td><strong>Pre-Licensing Education</strong></td>
+              <td>Typically 40–52 hours of pre-licensing coursework before sitting for the exam. Kaplan, ExamFX, and similar providers offer Colorado-approved courses.</td>
+            </tr>
+            <tr>
+              <td><strong>Licensing Exam</strong></td>
+              <td>Pearson VUE exam — approximately 150 questions, 70% passing score required. Fee: ~$47.</td>
+            </tr>
+            <tr>
+              <td><strong>License Application</strong></td>
+              <td>Filed through NIPR or Sircon within 12 months of passing exam. Fee: $47 + $5.60 NIPR transaction fee.</td>
+            </tr>
+            <tr>
+              <td><strong>Renewal Cycle</strong></td>
+              <td>Every 2 years, on the licensee's birthday month.</td>
+            </tr>
+            <tr>
+              <td><strong>Continuing Education</strong></td>
+              <td>24 CE hours per 2-year cycle: 18 hours in line of authority (Life/Health), 3 hours ethics, 3 hours elective. No grace period — must be complete before renewal.</td>
+            </tr>
+            <tr>
+              <td><strong>AHIP Certification</strong></td>
+              <td>Required annually to sell Medicare Advantage products. America's Health Insurance Plans exam — ~$175/year. Must be completed before AEP (typically by Sept).</td>
+            </tr>
+            <tr>
+              <td><strong>Carrier Appointments</strong></td>
+              <td>Licensed agents must also be appointed by each carrier they represent. Integrity's FMO (Impact Legacy Group) assists with contracting.</td>
+            </tr>
+            <tr>
+              <td><strong>HIPAA</strong></td>
+              <td>Client PHI (Protected Health Information) must be handled per HIPAA. No sharing over unsecured channels. Proper document disposal required.</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="callout callout-teal" style="border-left-color:var(--teal);background:var(--teal-pale);">
+          <strong>Chris's Path to Licensure:</strong> He is not required to be licensed for the Client Delight Specialist role. However, Amanda has indicated a licensing bonus is available once he gets his Colorado Life &amp; Health license. Timeline: 4–8 weeks of study while working full-time. Cost: approximately $250–$350 total (course + exam + application). This is a concrete next-step Chris can reference in the interview.
+        </div>
+
+      </div><!-- /compliance -->
+
+
+      <!-- ══════════════════════════════════════════
+           PANEL 5 — KEY TERMINOLOGY
+      ══════════════════════════════════════════ -->
+      <div id="panel-knowledge" class="panel">
+
+        <div class="section-intro">
+          <div class="section-label">Module 5</div>
+          <div class="section-title">Key Terminology</div>
+          <div class="section-desc">The language of Medicare insurance. Use these terms naturally in the interview to demonstrate preparation and industry literacy.</div>
+        </div>
+
+        <div class="callout callout-navy" style="margin-bottom:24px;">
+          Amanda has 20+ years in this industry. Using correct terminology signals that Chris has taken the time to prepare — exactly the quality she is looking for in a Client Delight Specialist.
+        </div>
+
+        <div class="term-grid">
+          <div class="term-card">
+            <div class="term-name">Medicare Parts A &amp; B</div>
+            <div class="term-def">Original Medicare. Part A = hospital coverage (inpatient). Part B = medical coverage (outpatient, doctors). Both have deductibles and cost-sharing.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Medicare Advantage (Part C)</div>
+            <div class="term-def">Private plan that replaces Original Medicare. Must cover A+B benefits. Often includes Part D, dental, vision, hearing. Integrity's primary product.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Medigap / Medicare Supplement</div>
+            <div class="term-def">Secondary insurance that fills cost gaps in Original Medicare. Pays after Medicare pays. No networks — accepted anywhere Medicare is accepted.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Part D — Prescription Drug Plan</div>
+            <div class="term-def">Standalone or bundled drug coverage. Each plan has a formulary (drug list). Low Income Subsidy (LIS/Extra Help) available for qualifying clients.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">SOA — Scope of Appointment</div>
+            <div class="term-def">Federally required CMS form signed before any Medicare sales meeting. Specifies exactly which plan types will be discussed. Must be collected 48 hours in advance (with exceptions). Retained 10 years.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">AEP — Annual Enrollment Period</div>
+            <div class="term-def">Oct 15 – Dec 7. The primary window when any Medicare beneficiary can switch plans. The busiest period for the agency.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">IEP — Initial Enrollment Period</div>
+            <div class="term-def">7-month window (3 months before, month of, 3 months after 65th birthday) when a person first becomes eligible for Medicare.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">SEP — Special Enrollment Period</div>
+            <div class="term-def">Time-limited enrollment window triggered by qualifying life events: losing employer coverage, moving, gaining Medicaid, etc.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Dual Eligible</div>
+            <div class="term-def">A person who qualifies for both Medicare (federal, age 65+) and Medicaid (state, low income). Integrity has specific expertise here. Key link to Complex Home Care Solutions' client population.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">SNP — Special Needs Plan</div>
+            <div class="term-def">Medicare Advantage plan with enhanced benefits for dual-eligibles (D-SNP), those in institutions (I-SNP), or those with chronic conditions (C-SNP). Offers grocery cards, OTC credits, transportation, and more.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">MOOP — Maximum Out-of-Pocket</div>
+            <div class="term-def">The cap on what a member pays in a plan year. Once reached, the plan covers 100% of covered services. Critical concept for comparing Medicare Advantage plans.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Formulary</div>
+            <div class="term-def">The list of prescription drugs covered by a Part D or Medicare Advantage plan. Organized by tiers that determine copay amounts. Must be verified for each client's medications.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">LIS / Extra Help</div>
+            <div class="term-def">Federal Low Income Subsidy program that reduces or eliminates Part D premiums and copays for qualifying low-income beneficiaries. Often relevant for dual-eligible clients.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">FMO — Field Marketing Organization</div>
+            <div class="term-def">Distributor between carriers and independent agents. Integrity works through Impact Legacy Group as its FMO. Provides CRM, compliance support, quoting tools, and contracting assistance.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">TPMO — Third-Party Marketing Org</div>
+            <div class="term-def">CMS designation for independent agents and brokers who market Medicare plans. All TPMOs must include CMS-required disclaimers in marketing materials.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">AHIP Certification</div>
+            <div class="term-def">Annual America's Health Insurance Plans certification required to sell Medicare Advantage. Must be completed before the AEP marketing period begins. Cost ~$175/year.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">SunFire Matrix</div>
+            <div class="term-def">Integrity's primary quoting and enrollment platform. Allows agents to compare Medicare plans across carriers, generate Summary of Benefits, and submit enrollments electronically.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Summary of Benefits (SOB)</div>
+            <div class="term-def">Standardized document that outlines a plan's coverage, costs, and rules. Must be provided to clients before enrollment. Generated through SunFire or directly from the carrier.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">HMO vs. PPO (MA subtypes)</div>
+            <div class="term-def">HMO: Must use in-network providers (except emergencies). Lower cost, more restrictions. PPO: Can use out-of-network providers at higher cost. More flexibility. Key factor in doctor network questions.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">DORA DOI</div>
+            <div class="term-def">Colorado Department of Regulatory Agencies Division of Insurance. Issues and regulates insurance licenses in Colorado. Sircon and NIPR are the portals used to apply and renew.</div>
+          </div>
+        </div>
+
+      </div><!-- /knowledge -->
+
+
+      <!-- ══════════════════════════════════════════
+           PANEL 6 — KNOWLEDGE CHECK QUIZ
+      ══════════════════════════════════════════ -->
+      <div id="panel-quiz" class="panel">
+
+        <div class="section-intro">
+          <div class="section-label">Module 6</div>
+          <div class="section-title">Knowledge Check</div>
+          <div class="section-desc">Test your understanding before Monday. These reflect real interview questions and on-the-job scenarios Chris will face at Integrity.</div>
+        </div>
+
+        <div class="quiz-progress">
+          <span id="quiz-counter">Question 1 of 12</span>
+          <span class="quiz-score" id="quiz-score-display">Score: 0 / 0</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="quiz-progress-fill" style="width:8%"></div>
+        </div>
+
+        <div id="quiz-container"></div>
+
+        <div style="display:flex;gap:10px;margin-top:8px;">
+          <button class="btn btn-outline" onclick="prevQuestion()">← Previous</button>
+          <button class="btn btn-primary" onclick="nextQuestion()">Next Question →</button>
+          <button class="btn btn-outline" onclick="resetQuiz()" style="margin-left:auto;">Reset Quiz</button>
+        </div>
+
+        <div id="quiz-result" style="display:none;" class="card" style="margin-top:20px;text-align:center;">
+          <div class="card-title" style="justify-content:center;">Quiz Complete</div>
+          <div id="quiz-final-score" style="font-size:32px;font-weight:700;color:var(--teal);font-family:'Playfair Display',serif;margin:12px 0;"></div>
+          <div id="quiz-feedback" style="color:var(--text-muted);font-size:14px;"></div>
+        </div>
+
+      </div><!-- /quiz -->
+
+
+      <!-- ══════════════════════════════════════════
+           PANEL 7 — RENEWAL TRACKER (Tool)
+      ══════════════════════════════════════════ -->
+      <div id="panel-tracker" class="panel">
+
+        <div class="section-intro">
+          <div class="section-label">Tool · Built for Integrity Insurance</div>
+          <div class="section-title">Client Renewal &amp; Birthday Tracker</div>
+          <div class="section-desc">A prototype tool Chris developed to demonstrate operational thinking. Tracks upcoming client birthdays (turning 65 for IEP) and plan renewal dates — sorted by urgency so no deadline slips through during AEP season.</div>
+        </div>
+
+        <div class="period-banner">
+          <div class="period-banner-text">
+            <div class="period-banner-title">Annual Enrollment Period 2025</div>
+            <div class="period-banner-sub">Oct 15 – Dec 7 · When clients can change their Medicare plans</div>
+          </div>
+          <div class="period-countdown">
+            <div class="countdown-value" id="aep-countdown">—</div>
+            <div class="countdown-label">Days Until AEP</div>
+          </div>
+        </div>
+
+        <div class="card-grid-3" style="margin-bottom:24px;">
+          <div class="stat-tile">
+            <div class="stat-value" id="stat-total">0</div>
+            <div class="stat-label">Total clients</div>
+          </div>
+          <div class="stat-tile teal">
+            <div class="stat-value" id="stat-30">0</div>
+            <div class="stat-label">Events in 30 days</div>
+          </div>
+          <div class="stat-tile gold">
+            <div class="stat-value" id="stat-week">0</div>
+            <div class="stat-label">Events this week</div>
+          </div>
+        </div>
+
+        <div class="tracker-toolbar">
+          <input type="text" class="tracker-input" id="client-search" placeholder="Search clients..." oninput="renderClients()">
+          <select class="tracker-select" id="client-filter" onchange="renderClients()">
+            <option value="all">All Clients</option>
+            <option value="week">This Week</option>
+            <option value="30">Next 30 Days</option>
+            <option value="birthday">Birthdays</option>
+            <option value="renewal">Renewals</option>
+          </select>
+          <button class="btn btn-primary" onclick="document.getElementById('add-modal').classList.add('open')">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+            Add Client
+          </button>
+        </div>
+
+        <div id="client-list"></div>
+
+      </div><!-- /tracker -->
+
+
+      <!-- ══════════════════════════════════════════
+           PANEL 8 — PLAN EXPLAINER (Tool)
+      ══════════════════════════════════════════ -->
+      <div id="panel-explainer" class="panel">
+
+        <div class="section-intro">
+          <div class="section-label">Tool · Built for Integrity Insurance</div>
+          <div class="section-title">Medicare Plan Explainer</div>
+          <div class="section-desc">A guided client-facing tool that walks new Medicare enrollees through 6 questions to identify which plan type fits their situation. Can be used by agents during consultations or deployed on the website for self-service.</div>
+        </div>
+
+        <div class="callout callout-navy" style="margin-bottom:24px;">
+          <strong>How Chris would present this:</strong> "I noticed that a lot of first-time Medicare enrollees arrive confused about the difference between Medicare Advantage and a Supplement. I built a quick guided tool that could sit on the website or be used during the intake call to help triage clients before the agent gets involved."
+        </div>
+
+        <div id="explainer-container">
+          <div id="explainer-intro" class="card" style="text-align:center;padding:40px 32px;">
+            <svg width="48" height="48" viewBox="0 0 20 20" fill="var(--teal)" style="margin:0 auto 20px;display:block;"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:10px;">Which Medicare Plan Fits You?</div>
+            <div style="color:var(--text-muted);font-size:14px;margin-bottom:28px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7;">Answer 6 questions and we'll identify the plan type that best fits your situation. No personal information required.</div>
+            <div style="display:flex;justify-content:center;gap:24px;margin-bottom:32px;">
+              <div style="text-align:center;"><div style="font-size:13px;color:var(--text-muted);">2 minutes</div></div>
+              <div style="text-align:center;"><div style="font-size:13px;color:var(--text-muted);">No personal info</div></div>
+              <div style="text-align:center;"><div style="font-size:13px;color:var(--text-muted);">Personalized results</div></div>
+            </div>
+            <button class="btn btn-primary" style="padding:12px 36px;font-size:15px;" onclick="startExplainer()">Begin Assessment</button>
+          </div>
+
+          <div id="explainer-questions" style="display:none;">
+            <div class="quiz-progress">
+              <span id="exp-counter">Question 1 of 6</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="exp-progress" style="width:16%"></div>
+            </div>
+            <div id="exp-question-container"></div>
+            <div style="display:flex;gap:10px;margin-top:8px;">
+              <button class="btn btn-outline" id="exp-back" onclick="explainerBack()">← Back</button>
+              <button class="btn btn-primary" id="exp-next" onclick="explainerNext()">Next →</button>
+            </div>
+          </div>
+
+          <div id="explainer-results" style="display:none;"></div>
+        </div>
+
+      </div><!-- /explainer -->
+
+    </div><!-- content-body -->
+  </main>
+</div><!-- app-shell -->
+
+
+<!-- ADD CLIENT MODAL -->
+<div id="add-modal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-title">Add New Client</div>
+    <div class="form-row">
+      <div><label class="form-label">Client Name</label><input class="form-input" id="f-name" placeholder="Full name"></div>
+      <div><label class="form-label">Phone</label><input class="form-input" id="f-phone" placeholder="(720) 555-0000"></div>
+    </div>
+    <div class="form-row">
+      <div><label class="form-label">Date of Birth</label><input class="form-input" id="f-dob" type="date"></div>
+      <div><label class="form-label">Enrollment Date</label><input class="form-input" id="f-enroll" type="date"></div>
+    </div>
+    <div class="form-row">
+      <div>
+        <label class="form-label">Plan Type</label>
+        <select class="form-select" id="f-plan">
+          <option>Medicare Advantage</option>
+          <option>Medicare Supplement</option>
+          <option>Part D Drug Plan</option>
+          <option>Life Insurance</option>
+          <option>Hospital Indemnity</option>
+        </select>
+      </div>
+      <div><label class="form-label">Carrier</label><input class="form-input" id="f-carrier" placeholder="e.g. UnitedHealthcare"></div>
+    </div>
+    <div class="form-row full">
+      <div><label class="form-label">Notes</label><input class="form-input" id="f-notes" placeholder="Preferences, medications, family info..."></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="addClient()">Add Client</button>
+      <button class="btn btn-outline" onclick="document.getElementById('add-modal').classList.remove('open')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ─── NAVIGATION ───────────────────────────────────────────
+const PANEL_TITLES = {
+  overview: 'Company Overview',
+  products: 'Products & Plans',
+  workflow: 'Daily Operations',
+  compliance: 'Compliance & Regulations',
+  knowledge: 'Key Terminology',
+  quiz: 'Knowledge Check',
+  tracker: 'Renewal Tracker',
+  explainer: 'Plan Explainer'
+};
+
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  const navBtns = document.querySelectorAll('.nav-item');
+  navBtns.forEach(btn => {
+    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + id + "'")) {
+      btn.classList.add('active');
+    }
+  });
+  document.getElementById('page-title').textContent = PANEL_TITLES[id] || id;
+}
+
+// ─── PLAN ACCORDION ───────────────────────────────────────
+function togglePlan(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// ─── QUIZ ─────────────────────────────────────────────────
+const QUESTIONS = [
+  {
+    q: "Amanda Matthews mentions that Integrity Insurance is an 'independent broker.' What does this mean for clients?",
+    options: ["They only sell one carrier's plans to keep things simple","They can compare plans across multiple carriers and offer unbiased advice","They charge clients a consultation fee for their services","They specialize exclusively in Medicare Advantage plans"],
+    answer: 1,
+    explanation: "Independent brokers represent multiple carriers (Integrity represents 9), so they can recommend the plan that genuinely fits the client — not just the one plan a captive agent is required to sell. Clients pay nothing for this service; agents are compensated by the carriers."
+  },
+  {
+    q: "A client calls Integrity on a Monday morning wanting to discuss Medicare Advantage options. They want to meet Thursday at 2 PM. When must the SOA form be collected?",
+    options: ["During the Thursday meeting is fine","By Tuesday 2 PM — 48 hours before the appointment","Any time before the meeting ends","Only if the client asks for a copy"],
+    answer: 1,
+    explanation: "CMS requires the SOA to be collected at least 48 hours before any Medicare sales appointment. The meeting is Thursday 2 PM, so the SOA must be completed by Tuesday 2 PM. Exception: If the client walked in unannounced or called in themselves (inbound), the 48-hour rule does not apply."
+  },
+  {
+    q: "A client has both Medicare (Part A & B) and Colorado Medicaid. What term describes this situation?",
+    options: ["Special Needs Eligible","Medicare Secondary Status","Dual Eligible","Medigap Qualified"],
+    answer: 2,
+    explanation: "Someone who qualifies for both Medicare and Medicaid is called 'Dual Eligible.' Integrity has specialized knowledge in this area. Dual-eligibles may qualify for a Special Needs Plan (D-SNP) with extra benefits like grocery cards, transportation, and OTC credits."
+  },
+  {
+    q: "Which enrollment period allows ALL Medicare beneficiaries to switch their plan, regardless of their current coverage?",
+    options: ["IEP — Initial Enrollment Period","OEP — Open Enrollment Period (Jan 1–Mar 31)","AEP — Annual Enrollment Period (Oct 15–Dec 7)","SEP — Special Enrollment Period"],
+    answer: 2,
+    explanation: "The AEP (Annual Enrollment Period), Oct 15–Dec 7, is when any Medicare beneficiary can switch plans, change from Medicare Advantage to Original Medicare, add/change Part D, and more. This is Integrity's busiest season. The OEP (Jan–Mar) only applies to people already on Medicare Advantage."
+  },
+  {
+    q: "A client on a Medicare Supplement asks why they need a separate Part D plan. What is the correct explanation?",
+    options: ["Medicare Supplements include drug coverage automatically","Medicare Supplements (Medigap) do not include prescription drug coverage — a standalone Part D plan must be purchased separately","Part D is optional and most Medicare Supplement clients don't need it","Medicare pays for all drugs once you have a Supplement plan"],
+    answer: 1,
+    explanation: "Medicare Supplement (Medigap) plans do NOT include prescription drug coverage. Clients on a Supplement must purchase a separate Part D Prescription Drug Plan to have drug coverage. This is a key difference vs. Medicare Advantage, which usually bundles Part D."
+  },
+  {
+    q: "When CMS rules say agents must retain Scope of Appointment forms for '10 years,' what does 'even if no sale was made' mean for Chris's admin work?",
+    options: ["SOAs only need to be saved when an enrollment was completed","SOAs must be filed and retained for every appointment, including consultations that didn't result in a plan enrollment","SOAs can be discarded after 12 months if no follow-up is scheduled","Only the agent needs to keep the SOA — the office doesn't"],
+    answer: 1,
+    explanation: "CMS requires every SOA to be retained for 10 years regardless of outcome. This means even if a client met with an agent, reviewed their options, and decided to keep their current plan — that SOA must still be filed and stored. This is a critical compliance task for admin staff."
+  },
+  {
+    q: "Which of these statements about Medicare Advantage (Part C) is accurate?",
+    options: ["It can never include dental or vision benefits","It replaces Original Medicare and must cover at least the same benefits, often adding extras like dental, vision, and gym memberships","It supplements Original Medicare to fill cost gaps","It is only available to people with very low income"],
+    answer: 1,
+    explanation: "Medicare Advantage replaces Original Medicare — clients use their MA plan card instead of their Medicare card. By law, it must cover everything Original Medicare covers, and most plans add extra benefits (dental, vision, hearing, Part D, gym membership). Plans often have $0 monthly premium but use network providers."
+  },
+  {
+    q: "A marketing flyer for Integrity Insurance does NOT include the statement 'We do not offer every plan available in your area...' What should Chris do?",
+    options: ["Distribute it — that disclaimer is optional for flyers","Flag it and do not distribute until the required CMS TPMO disclaimer is added","Add a handwritten note to each flyer","Only required for digital materials, not print"],
+    answer: 1,
+    explanation: "CMS requires all TPMO marketing materials to include the standard disclaimer: 'We do not offer every plan available in your area. Currently we represent 9 organizations which offer 133 products in your area. Please contact Medicare.gov...' Distributing materials without it is a compliance violation. Chris should flag and hold any materials missing this disclosure."
+  },
+  {
+    q: "What is the MOOP in a Medicare Advantage plan?",
+    options: ["The monthly premium amount","The annual Maximum Out-of-Pocket — the most a member will pay in a plan year before the plan covers 100% of covered services","The minimum number of months a member must stay enrolled","The maximum number of prescription drugs covered"],
+    answer: 1,
+    explanation: "MOOP (Maximum Out-of-Pocket) is a critical consumer protection in Medicare Advantage plans. Once a member's cost-sharing (copays, coinsurance) reaches the MOOP limit, the plan pays 100% of covered services for the rest of the year. It's a key comparison point between plans."
+  },
+  {
+    q: "Why can Integrity Insurance begin marketing 2026 plans on October 1 but not enroll clients until October 15?",
+    options: ["October 15 is when carriers open their enrollment systems","CMS regulations separate the marketing start date (Oct 1) from the AEP enrollment start date (Oct 15) to prevent high-pressure early selling","Integrity's FMO requires a two-week review period","This only applies to new clients, not renewals"],
+    answer: 1,
+    explanation: "CMS separates marketing (Oct 1) from enrollment (Oct 15) as a consumer protection measure. Agents can begin explaining next year's plans and scheduling appointments starting Oct 1, but cannot submit any enrollments until Oct 15 when the Annual Enrollment Period officially begins."
+  },
+  {
+    q: "A Supplement client travels 4 months a year to Arizona. Why might Supplement be a better fit than Medicare Advantage for this client?",
+    options: ["Medicare Advantage covers all states equally so it doesn't matter","Medicare Supplement is accepted by any provider who accepts Medicare — no network restrictions and nationwide coverage, making it ideal for frequent travelers","Supplement plans have lower premiums so the client saves money traveling","Medicare Advantage automatically covers Arizona because it is in the same country"],
+    answer: 1,
+    explanation: "Medicare Supplement (Medigap) is accepted anywhere in the US that accepts Original Medicare — no networks, no prior authorization for most services. Medicare Advantage plans are network-based and may only cover out-of-network care for emergencies. A client spending significant time in another state is often better served by a Supplement."
+  },
+  {
+    q: "Amanda is a graduate of Disney's Perfect Service Experience program. What does this tell you about how she defines 'Client Delight'?",
+    options: ["She expects agents to dress in costumes and use themed language","She measures client satisfaction against a premium hospitality standard — not just problem resolution, but creating a consistently exceptional, memorable experience","She focuses only on speed and efficiency in client interactions","Disney training means she prioritizes visual branding above all else"],
+    answer: 1,
+    explanation: "Disney's service model is centered on anticipating needs before they are expressed, turning routine interactions into memorable moments, and ensuring every person in the organization — at every touchpoint — upholds the same standard. For Amanda, 'delight' is the floor, not the goal. Chris should frame his banking relationship experience in these terms: proactive service, emotional attunement, and dignity for every client."
+  }
+];
+
+let currentQ = 0;
+let answers = {};
+let score = 0;
+
+function renderQuiz() {
+  const q = QUESTIONS[currentQ];
+  const container = document.getElementById('quiz-container');
+  const answered = answers[currentQ] !== undefined;
+
+  container.innerHTML = `
+    <div class="quiz-card">
+      <div class="quiz-question">${currentQ + 1}. ${q.q}</div>
+      <div class="quiz-options">
+        ${q.options.map((opt, i) => {
+          let cls = 'quiz-option';
+          if (answered) {
+            cls += ' disabled';
+            if (i === q.answer) cls += ' correct';
+            else if (i === answers[currentQ] && i !== q.answer) cls += ' wrong';
+          }
+          return `<button class="${cls}" onclick="selectAnswer(${i})">${opt}</button>`;
+        }).join('')}
+      </div>
+      <div class="quiz-explanation ${answered ? 'show' : ''}" id="quiz-exp">
+        ${q.explanation}
+      </div>
+    </div>
+  `;
+
+  document.getElementById('quiz-counter').textContent = `Question ${currentQ + 1} of ${QUESTIONS.length}`;
+  document.getElementById('quiz-progress-fill').style.width = `${((currentQ + 1) / QUESTIONS.length) * 100}%`;
+
+  const answered_count = Object.keys(answers).length;
+  document.getElementById('quiz-score-display').textContent = `Score: ${score} / ${answered_count}`;
+}
+
+function selectAnswer(idx) {
+  if (answers[currentQ] !== undefined) return;
+  answers[currentQ] = idx;
+  if (idx === QUESTIONS[currentQ].answer) score++;
+  renderQuiz();
+}
+
+function nextQuestion() {
+  if (currentQ < QUESTIONS.length - 1) {
+    currentQ++;
+    renderQuiz();
+  } else if (Object.keys(answers).length === QUESTIONS.length) {
+    showResult();
+  }
+}
+
+function prevQuestion() {
+  if (currentQ > 0) { currentQ--; renderQuiz(); }
+}
+
+function showResult() {
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  let msg = pct >= 90 ? "Excellent — you are well prepared for Monday." : pct >= 70 ? "Good foundation. Review the modules where you missed questions." : "Keep studying — revisit the compliance and products modules before your interview.";
+  document.getElementById('quiz-result').style.display = 'block';
+  document.getElementById('quiz-final-score').textContent = `${score} / ${QUESTIONS.length} (${pct}%)`;
+  document.getElementById('quiz-feedback').textContent = msg;
+}
+
+function resetQuiz() {
+  currentQ = 0; answers = {}; score = 0;
+  document.getElementById('quiz-result').style.display = 'none';
+  renderQuiz();
+}
+
+renderQuiz();
+
+
+// ─── TRACKER ──────────────────────────────────────────────
+let clients = [
+  { id: 1, name: "Margaret Sullivan", dob: "1960-03-25", enrollDate: "2024-01-15", plan: "Medicare Advantage", carrier: "UnitedHealthcare", phone: "(303) 555-0142", notes: "Prefers morning calls." },
+  { id: 2, name: "Robert Chen", dob: "1959-08-10", enrollDate: "2024-03-22", plan: "Medicare Supplement", carrier: "Mutual of Omaha", phone: "(720) 555-0198", notes: "Travels to AZ Oct–March." },
+  { id: 3, name: "Dorothy Hawkins", dob: "1958-03-18", enrollDate: "2023-11-01", plan: "Medicare Advantage", carrier: "Humana", phone: "(303) 555-0267", notes: "Diabetic — insulin coverage critical." },
+  { id: 4, name: "James Kowalski", dob: "1960-09-05", enrollDate: "2023-01-01", plan: "Part D Drug Plan", carrier: "SilverScript", phone: "(720) 555-0331", notes: "Takes 4 medications. Review formulary annually." },
+  { id: 5, name: "Helen Petrov", dob: "1957-04-12", enrollDate: "2024-04-01", plan: "Medicare Supplement", carrier: "Aetna", phone: "(303) 555-0089", notes: "Detail-oriented — send documents in advance." },
+  { id: 6, name: "Frank Delgado", dob: "1960-06-30", enrollDate: "2022-01-01", plan: "Medicare Advantage", carrier: "Cigna", phone: "(720) 555-0412", notes: "Spanish preferred." }
+];
+
+function daysUntil(dateStr) {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const d = new Date(dateStr);
+  const thisYear = new Date(today.getFullYear(), d.getMonth(), d.getDate());
+  if (thisYear < today) thisYear.setFullYear(today.getFullYear() + 1);
+  return Math.round((thisYear - today) / 86400000);
+}
+
+function renewalDate(enrollDate) {
+  const d = new Date(enrollDate);
+  const today = new Date();
+  let r = new Date(today.getFullYear(), d.getMonth(), d.getDate());
+  if (r < today) r.setFullYear(today.getFullYear() + 1);
+  return r.toISOString().split('T')[0];
+}
+
+function urgencyColor(days) {
+  if (days <= 7) return { color: '#b91c1c', label: 'This Week' };
+  if (days <= 30) return { color: '#B8821E', label: 'This Month' };
+  if (days <= 60) return { color: '#2D8B7A', label: 'Next 60 Days' };
+  return { color: '#94a3b8', label: `${days}d` };
+}
+
+function fmtDate(str) {
+  return new Date(str + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function updateStats() {
+  document.getElementById('stat-total').textContent = clients.length;
+  document.getElementById('stat-30').textContent = clients.filter(c => daysUntil(c.dob) <= 30 || daysUntil(renewalDate(c.enrollDate)) <= 30).length;
+  document.getElementById('stat-week').textContent = clients.filter(c => daysUntil(c.dob) <= 7 || daysUntil(renewalDate(c.enrollDate)) <= 7).length;
+
+  const aepDate = new Date('2025-10-15');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const days = Math.max(0, Math.round((aepDate - today) / 86400000));
+  document.getElementById('aep-countdown').textContent = days > 0 ? days : 'Active Now';
+}
+
+function renderClients() {
+  const search = document.getElementById('client-search').value.toLowerCase();
+  const filter = document.getElementById('client-filter').value;
+
+  let filtered = clients.filter(c => {
+    const match = !search || c.name.toLowerCase().includes(search) || c.carrier.toLowerCase().includes(search) || c.plan.toLowerCase().includes(search);
+    if (!match) return false;
+    const bd = daysUntil(c.dob), rd = daysUntil(renewalDate(c.enrollDate));
+    if (filter === 'week') return bd <= 7 || rd <= 7;
+    if (filter === '30') return bd <= 30 || rd <= 30;
+    if (filter === 'birthday') return bd <= 60;
+    if (filter === 'renewal') return rd <= 60;
+    return true;
+  }).sort((a, b) => Math.min(daysUntil(a.dob), daysUntil(renewalDate(a.enrollDate))) - Math.min(daysUntil(b.dob), daysUntil(renewalDate(b.enrollDate))));
+
+  const container = document.getElementById('client-list');
+  if (!filtered.length) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">No clients found.</div>';
+    return;
+  }
+
+  container.innerHTML = filtered.map(c => {
+    const bd = daysUntil(c.dob), rd = daysUntil(renewalDate(c.enrollDate));
+    const nextDays = Math.min(bd, rd);
+    const nextType = bd <= rd ? 'Birthday' : 'Renewal';
+    const { color, label } = urgencyColor(nextDays);
+    const initials = c.name.split(' ').map(w => w[0]).slice(0,2).join('');
+
+    return `
+    <div class="client-row" id="cr-${c.id}">
+      <div class="client-row-header" onclick="toggleClient(${c.id})">
+        <div class="client-avatar">${initials}</div>
+        <div style="flex:1;">
+          <div class="client-name">${c.name}</div>
+          <div class="client-meta">${c.plan} &middot; ${c.carrier}</div>
+        </div>
+        <div class="client-urgency">
+          <div class="urgency-days" style="color:${color}">${nextDays === 0 ? 'Today' : nextDays + 'd'}</div>
+          <div class="urgency-label">${nextType}</div>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--silver)" style="flex-shrink:0;margin-left:8px;"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+      </div>
+      <div class="client-detail" id="cd-${c.id}">
+        <div class="client-detail-grid">
+          <div><div class="detail-label">Birthday</div><div class="detail-value">${fmtDate(c.dob)} <span style="color:var(--text-muted);font-size:12px;">(${bd}d)</span></div></div>
+          <div><div class="detail-label">Plan Renewal</div><div class="detail-value">${fmtDate(renewalDate(c.enrollDate))} <span style="color:var(--text-muted);font-size:12px;">(${rd}d)</span></div></div>
+          <div><div class="detail-label">Phone</div><div class="detail-value" style="color:var(--teal);">${c.phone}</div></div>
+        </div>
+        ${c.notes ? `<div style="font-size:13px;color:var(--text-muted);border-top:1px solid var(--border);padding-top:10px;">${c.notes}</div>` : ''}
+        <div style="margin-top:12px;display:flex;gap:8px;">
+          <button class="btn btn-outline btn-sm" onclick="removeClient(${c.id})">Remove</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  updateStats();
+}
+
+function toggleClient(id) {
+  document.getElementById('cd-' + id).classList.toggle('open');
+}
+
+function addClient() {
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) return;
+  clients.push({
+    id: Date.now(),
+    name,
+    phone: document.getElementById('f-phone').value || 'N/A',
+    dob: document.getElementById('f-dob').value || new Date().toISOString().split('T')[0],
+    enrollDate: document.getElementById('f-enroll').value || new Date().toISOString().split('T')[0],
+    plan: document.getElementById('f-plan').value,
+    carrier: document.getElementById('f-carrier').value || 'N/A',
+    notes: document.getElementById('f-notes').value
+  });
+  document.getElementById('add-modal').classList.remove('open');
+  ['f-name','f-phone','f-dob','f-enroll','f-carrier','f-notes'].forEach(id => document.getElementById(id).value = '');
+  renderClients();
+}
+
+function removeClient(id) {
+  clients = clients.filter(c => c.id !== id);
+  renderClients();
+}
+
+renderClients();
+
+
+// ─── PLAN EXPLAINER ───────────────────────────────────────
+const EXP_QUESTIONS = [
+  {
+    id: 'age', q: 'How old are you?',
+    options: ['Under 64', 'Turning 65 within 6 months', '65 or older and new to Medicare', 'Already enrolled in Medicare']
+  },
+  {
+    id: 'doctors', q: 'How important is keeping your current doctors and specialists?',
+    options: ['Critical — I have specific providers I must keep', 'Preferred, but I could adjust', 'Flexible — open to finding new providers']
+  },
+  {
+    id: 'travel', q: 'Do you spend extended time (more than 4 weeks) outside Colorado in a year?',
+    options: ['Yes — I travel or live part-year elsewhere', 'Occasionally — a few short trips', 'No — I stay primarily in Colorado']
+  },
+  {
+    id: 'budget', q: 'What best describes your preference for monthly costs?',
+    options: ['Prefer $0 or low monthly premium — even if I pay more when I use care', 'Want predictable, stable costs regardless of premium', 'Premium is not the priority — I want maximum coverage']
+  },
+  {
+    id: 'drugs', q: 'Do you take prescription medications regularly?',
+    options: ['Yes — several or high-cost medications', 'Yes — a few basic medications', 'Rarely or none']
+  },
+  {
+    id: 'extras', q: 'Which additional benefits matter most to you?',
+    options: ['Dental, vision, and hearing', 'Gym membership and wellness benefits', 'Coverage while traveling nationwide', 'Predictability — I just want simple, comprehensive coverage']
+  }
+];
+
+let expStep = 0;
+let expAnswers = {};
+
+function startExplainer() {
+  document.getElementById('explainer-intro').style.display = 'none';
+  document.getElementById('explainer-questions').style.display = 'block';
+  expStep = 0; expAnswers = {};
+  renderExplainer();
+}
+
+function renderExplainer() {
+  const q = EXP_QUESTIONS[expStep];
+  document.getElementById('exp-counter').textContent = `Question ${expStep + 1} of ${EXP_QUESTIONS.length}`;
+  document.getElementById('exp-progress').style.width = `${((expStep + 1) / EXP_QUESTIONS.length) * 100}%`;
+  document.getElementById('exp-back').style.visibility = expStep === 0 ? 'hidden' : 'visible';
+  document.getElementById('exp-next').textContent = expStep === EXP_QUESTIONS.length - 1 ? 'See Results' : 'Next →';
+
+  document.getElementById('exp-question-container').innerHTML = `
+    <div class="quiz-card">
+      <div class="quiz-question">${q.q}</div>
+      <div class="quiz-options">
+        ${q.options.map((opt, i) => `
+          <button class="quiz-option ${expAnswers[q.id] === i ? 'correct' : ''}" onclick="selectExp(${i})">${opt}</button>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function selectExp(i) {
+  expAnswers[EXP_QUESTIONS[expStep].id] = i;
+  renderExplainer();
+}
+
+function explainerBack() { if (expStep > 0) { expStep--; renderExplainer(); } }
+
+function explainerNext() {
+  const q = EXP_QUESTIONS[expStep];
+  if (expAnswers[q.id] === undefined) return;
+  if (expStep < EXP_QUESTIONS.length - 1) {
+    expStep++;
+    renderExplainer();
+  } else {
+    showExplainerResults();
+  }
+}
+
+function showExplainerResults() {
+  document.getElementById('explainer-questions').style.display = 'none';
+
+  const a = expAnswers;
+  const plans = [];
+
+  // Medicare Advantage score
+  let maScore = 40;
+  if (a.budget === 0) maScore += 25;
+  if (a.extras === 0 || a.extras === 1) maScore += 15;
+  if (a.travel === 2) maScore += 10;
+  if (a.travel === 0) maScore -= 20;
+  if (a.doctors === 0) maScore -= 15;
+  if (a.budget === 2) maScore -= 10;
+  plans.push({ name: 'Medicare Advantage', code: 'Part C', score: Math.max(10, Math.min(98, maScore)), color: 'var(--teal)',
+    desc: 'An all-in-one private plan that replaces Original Medicare. Often includes dental, vision, Part D, and gym benefits — frequently at $0 monthly premium. Best for clients who want extra perks and are flexible on provider choice.',
+    pros: ['Often $0 monthly premium', 'Dental, vision, hearing frequently included', 'Part D drug coverage usually bundled', 'Gym and wellness benefits common'],
+    cons: ['Network restrictions apply', 'Coverage generally limited to plan service area', 'Prior authorization may be required']
+  });
+
+  // Supplement score
+  let suppScore = 40;
+  if (a.budget === 2) suppScore += 30;
+  if (a.travel === 0) suppScore += 30;
+  if (a.doctors === 0) suppScore += 25;
+  if (a.extras === 2 || a.extras === 3) suppScore += 15;
+  if (a.budget === 0) suppScore -= 20;
+  plans.push({ name: 'Medicare Supplement', code: 'Medigap · Plans G, N, F', score: Math.max(10, Math.min(98, suppScore)), color: 'var(--navy)',
+    desc: 'Works alongside Original Medicare to cover gaps like copays and deductibles. Accepted anywhere Medicare is accepted in the US — no network restrictions. Ideal for travelers and those who need freedom of provider choice.',
+    pros: ['Any doctor who accepts Medicare, nationwide', 'Very predictable out-of-pocket costs', 'No referrals needed for specialists', 'Ideal for frequent travelers'],
+    cons: ['Higher monthly premium', 'Does not include dental, vision, or hearing', 'Separate Part D plan required for prescriptions']
+  });
+
+  plans.sort((a, b) => b.score - a.score);
+
+  const resultsHTML = `
+    <div class="highlight-box" style="margin-bottom:24px;">
+      <div class="highlight-box-label">Your Plan Assessment</div>
+      <div class="highlight-box-title">Based on your answers, here are your best-fit plan types</div>
+      <div class="highlight-box-text">These results are educational guidance only. An Integrity Insurance advisor can compare specific plans across all 9 carriers we represent to find the right fit for your situation — at no cost to you.</div>
+    </div>
+
+    ${plans.map((p, i) => `
+    <div class="plan-card" style="margin-bottom:16px;${i === 0 ? 'border-color:' + p.color + ';box-shadow:0 4px 20px rgba(0,0,0,0.08)' : ''}">
+      <div style="background:${i === 0 ? p.color : 'transparent'};padding:16px 22px;display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          ${i === 0 ? '<span style="background:rgba(255,255,255,0.2);color:white;font-size:10px;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.08em;text-transform:uppercase;">Best Match</span>' : ''}
+          <div>
+            <div style="font-family:\'Playfair Display\',serif;font-size:16px;font-weight:700;color:${i === 0 ? 'white' : 'var(--navy)'};">${p.name}</div>
+            <div style="font-size:11px;font-family:\'DM Mono\',monospace;color:${i === 0 ? 'rgba(255,255,255,0.7)' : 'var(--text-muted)'};">${p.code}</div>
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:22px;font-weight:800;color:${i === 0 ? 'white' : p.color};font-family:\'Playfair Display\',serif;">${p.score}%</div>
+          <div style="font-size:10px;color:${i === 0 ? 'rgba(255,255,255,0.6)' : 'var(--text-muted)'};text-transform:uppercase;letter-spacing:.06em;">Match</div>
+        </div>
+      </div>
+      <div style="padding:18px 22px;">
+        <p style="font-size:13.5px;color:var(--text);line-height:1.7;margin-bottom:16px;">${p.desc}</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div>
+            <div class="plan-col-label">Advantages</div>
+            <ul class="check-list">${p.pros.map(x => `<li><svg width="13" height="13" viewBox="0 0 20 20" fill="var(--teal)"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>${x}</li>`).join('')}</ul>
+          </div>
+          <div>
+            <div class="plan-col-label">Considerations</div>
+            <ul class="check-list">${p.cons.map(x => `<li><svg width="13" height="13" viewBox="0 0 20 20" fill="var(--gold)"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>${x}</li>`).join('')}</ul>
+          </div>
+        </div>
+      </div>
+    </div>`).join('')}
+
+    <div style="background:var(--teal-pale);border:1px solid rgba(45,139,122,0.2);border-radius:var(--radius-lg);padding:24px;text-align:center;margin-top:8px;">
+      <div style="font-family:\'Playfair Display\',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:8px;">Ready to explore specific plans?</div>
+      <p style="color:var(--text-muted);font-size:13.5px;margin-bottom:18px;">Integrity Insurance offers free, no-obligation consultations. We represent 9 carriers and 133 products across Colorado.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <a href="tel:7209901680" style="background:var(--teal);color:white;padding:10px 22px;border-radius:8px;font-size:13.5px;font-weight:700;text-decoration:none;">(720) 990-1680</a>
+        <button class="btn btn-outline" onclick="restartExplainer()">Start Over</button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('explainer-results').style.display = 'block';
+  document.getElementById('explainer-results').innerHTML = resultsHTML;
+}
+
+function restartExplainer() {
+  expStep = 0; expAnswers = {};
+  document.getElementById('explainer-results').style.display = 'none';
+  document.getElementById('explainer-results').innerHTML = '';
+  document.getElementById('explainer-intro').style.display = 'block';
+}
+
+</script>
+</body>
+</html>
